@@ -115,6 +115,7 @@
 				TargetAttributes = {
 					D8C762E821304C2A00BB1FDB = {
 						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = GY56ZAC5AY;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -280,6 +281,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GY56ZAC5AY;
 				INFOPLIST_FILE = "GPS Distance Counter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.martin1248.GPS-Distance-Counter";
@@ -291,6 +293,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GY56ZAC5AY;
 				INFOPLIST_FILE = "GPS Distance Counter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.martin1248.GPS-Distance-Counter";
