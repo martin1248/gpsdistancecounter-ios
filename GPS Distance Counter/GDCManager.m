@@ -49,14 +49,9 @@
         return;
     }
 
-    if(self.locationUpdateCount == 0){
-        [self myLog:@"Error: Did not get any GPS locations!"];
-    }
-    if(self.locationUpdateCount < 3){
-        [self myLog:@"Warning: Got less then 3 GPS locations!"];
-    }
-
-    [self myLog:[NSString stringWithFormat:@"%dm(%dm) +/- %dm/%dm for %d sec. (%d loc.)", (int)round(self.currentDistance), (int)round(self.currentDistanceSimple), (int)round(self.minAccuracy), (int)round(self.maxAccuracy), (int)round([self currentDuration]), self.locationUpdateCount]];
+    [self myLog:[NSString stringWithFormat:@"%dm +/-%dm/%dm in %d sec. (%d locations)", (int)round(self.currentDistance), (int)round(self.minAccuracy), (int)round(self.maxAccuracy), (int)round([self currentDuration]), self.locationUpdateCount]];
+    
+    //[self myLog:[NSString stringWithFormat:@"%dm(%dm) +/- %dm/%dm for %d sec. (%d loc.)", (int)round(self.currentDistance), (int)round(self.currentDistanceSimple), (int)round(self.minAccuracy), (int)round(self.maxAccuracy), (int)round([self currentDuration]), self.locationUpdateCount]];
 
     //[self myLog:[NSString stringWithFormat:@"%dm/%dm %dsec %dkm/h +/-%dm(max%d) %dUpd.", (int)round(self.currentDistanceSimple), (int)round(self.currentDistance), (int)round([self currentDuration]), (int)round(self.lastLocation.speed*3.6), (int)round(self.lastLocation.horizontalAccuracy), (int)round(self.maxAccuracy), self.locationUpdateCount]];
 
