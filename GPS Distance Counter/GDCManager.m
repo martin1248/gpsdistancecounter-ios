@@ -48,8 +48,8 @@
     if(!self.distanceCountInProgress) {
         return;
     }
-
-    [self myLog:[NSString stringWithFormat:@"%dm +/-%dm/%dm in %d sec. (%d locations)", (int)round(self.currentDistance), (int)round(self.minAccuracy), (int)round(self.maxAccuracy), (int)round([self currentDuration]), self.locationUpdateCount]];
+                                                 
+    [self myLog2:[NSString stringWithFormat:@"\nDistance count result is\n%d meters\n\n Duration is\n %d seconds\n\n The best accuracy was\n %d meters\n\n The worst accuracy was\n%d meters\n\nCalculation is based on\n%d GPS locations", (int)round(self.currentDistance), (int)round([self currentDuration]), (int)round(self.minAccuracy), (int)round(self.maxAccuracy), self.locationUpdateCount]];
     
     //[self myLog:[NSString stringWithFormat:@"%dm(%dm) +/- %dm/%dm for %d sec. (%d loc.)", (int)round(self.currentDistance), (int)round(self.currentDistanceSimple), (int)round(self.minAccuracy), (int)round(self.maxAccuracy), (int)round([self currentDuration]), self.locationUpdateCount]];
 
@@ -159,12 +159,18 @@
 
 - (void)myLog:(NSString *)message
 {
-    if(!self.quickLog){
-        self.quickLog = [NSMutableString new];
-    }
+    //if(!self.quickLog){
+    //    self.quickLog = [NSMutableString new];
+    //}
     NSLog(@"GDC: %@ at %@",message, self.lastLocation);
-    [self.quickLog appendString:message]; // Uhhhh
-    [self.quickLog appendString:@"\n"];
+    //[self.quickLog appendString:message]; // Uhhhh
+    //[self.quickLog appendString:@"\n"];
+}
+
+- (void)myLog2:(NSString *)message
+{
+    NSLog(@"GDC: %@ at %@",message, self.lastLocation);
+    self.quickLog = message;
 }
 
 
