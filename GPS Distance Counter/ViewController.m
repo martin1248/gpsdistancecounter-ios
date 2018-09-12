@@ -6,9 +6,11 @@
 //  Copyright © 2018 Martin1248. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
+#import <AVFoundation/AVFoundation.h>
 #import "ViewController.h"
 #import "GDCManager.h"
-#import <CoreLocation/CoreLocation.h>
+
 
 @interface ViewController ()
 
@@ -30,13 +32,11 @@
     NSLog(@"Initialized locationManager in viewDidLoad. %@",[GDCManager sharedManager].locationManager);
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     NSLog(@"didReceiveMemoryWarning");
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [self updateDistanceCount];
@@ -68,6 +68,9 @@
 }
 
 - (IBAction)startStopWasTapped:(id)sender {
+    if([self.distanceTextBox.text integerValue] == 0) {
+        return; // Do nothing if a)a zero, b) no number at all or c) a text was entered
+    }
     if([GDCManager sharedManager].distanceCountInProgress) {
         [[GDCManager sharedManager] stopCount];
         self.distanceTextBox.userInteractionEnabled = YES;
@@ -78,7 +81,6 @@
     [self updateDistanceCount];
 }
 
-
 - (void)updateDistanceCount {
     if([GDCManager sharedManager].distanceCountInProgress) {
         double distance = [self.distanceTextBox.text integerValue] - [GDCManager sharedManager].currentDistance;
@@ -87,6 +89,7 @@
             distance = 0;
             [[GDCManager sharedManager] stopCount];
             self.distanceTextBox.userInteractionEnabled = YES;
+            AudioServicesPlaySystemSound(1021);
         }
         
         [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];

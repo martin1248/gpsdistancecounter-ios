@@ -18,7 +18,5 @@
 @property (strong, nonatomic) IBOutlet UITextField *distanceTextBox;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
-
-
 @end
 

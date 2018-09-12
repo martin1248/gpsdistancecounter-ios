@@ -36,14 +36,13 @@
 - (void)startCount {
     self.distanceCountInProgress = YES;
     self.startDate = [NSDate date];
-    
 }
 
 - (void)stopCount {
     self.distanceCountInProgress = NO;
+    self.startDate = nil;
     self.currentDistance = 0;
     self.lastLocation = nil;
-    self.startDate = nil;
     self.accuracy = 0;
 }
 
