@@ -18,24 +18,17 @@ static NSString *const GDCNewDataNotification = @"GDCNewDataNotification";
 + (GDCManager *)sharedManager;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property BOOL trackingEnabled;
 @property BOOL distanceCountInProgress;
-@property (strong, nonatomic) CLLocation *startLocation;
 @property (strong, nonatomic) CLLocation *lastLocation;
 @property (nonatomic) CLLocationDistance currentDistance;
-@property (nonatomic) CLLocationDistance currentDistanceSimple;
-@property (nonatomic) CLLocationAccuracy minAccuracy;
-@property (nonatomic) CLLocationAccuracy maxAccuracy;
-@property (nonatomic) int locationUpdateCount;
+@property (nonatomic) CLLocationAccuracy accuracy;
 @property (strong, nonatomic) NSDate *startDate;
-@property (strong, nonatomic) NSString *quickLog;
 
 
 - (void)startAllUpdates;
 - (void)stopAllUpdates;
 - (void)startCount;
 - (void)stopCount;
-- (void)myLog:(NSString *)message;
 - (NSTimeInterval)currentDuration;
 
 @end

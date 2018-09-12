@@ -13,11 +13,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *startStopButton;
 - (IBAction)startStopWasTapped:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *distanceLabel;
-@property (strong, nonatomic) IBOutlet UILabel *distanceLabelSimple;
 @property (strong, nonatomic) IBOutlet UILabel *durationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accuracyLabel;
-@property (strong, nonatomic) IBOutlet UILabel *speedLabel;
-@property (strong, nonatomic) IBOutlet UILabel *logLabel;
 
 
 

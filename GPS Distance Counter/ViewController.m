@@ -27,14 +27,14 @@
     [self setNeedsStatusBarAppearanceUpdate];
 
     //The next task is to configure the instance of the CLLocationManager class and to make sure that the application requests permission from the user to track the current location of the device. Since this needs to occur when the view loads, an ideal location is in the view controller’s viewDidLoad method in the ViewController.m file:
-    NSLog(@"GDC-Info: Initialized locationManager in viewDidLoad. %@",[GDCManager sharedManager].locationManager);
+    NSLog(@"Initialized locationManager in viewDidLoad. %@",[GDCManager sharedManager].locationManager);
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    [[GDCManager sharedManager] myLog:@"GDC-Error: didReceiveMemoryWarning"];
+    NSLog(@"didReceiveMemoryWarning");
 }
 
 
@@ -67,13 +67,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
 - (IBAction)startStopWasTapped:(id)sender {
     if([GDCManager sharedManager].distanceCountInProgress) {
         [[GDCManager sharedManager] stopCount];
-        [[GDCManager sharedManager] stopAllUpdates];
     } else {
-        [[GDCManager sharedManager] startAllUpdates];
         [[GDCManager sharedManager] startCount];
     }
     [self updateDistanceCount];
@@ -81,13 +78,11 @@
 
 
 - (void)updateDistanceCount {
-    self.logLabel.text = [GDCManager sharedManager].quickLog; // Uhhhhhh
     if([GDCManager sharedManager].distanceCountInProgress) {
         [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
         self.startStopButton.backgroundColor = [UIColor colorWithRed:252.f/255.f green:109.f/255.f blue:111.f/255.f alpha:1];
         self.durationLabel.text = [ViewController timeFormatted:[GDCManager sharedManager].currentDuration];
         double distance = [GDCManager sharedManager].currentDistance;
-        double distanceSimple = [GDCManager sharedManager].currentDistanceSimple;
         NSString *format;
         if(distance >= 1000) {
             format = @"%0.0f";
@@ -97,20 +92,15 @@
             format = @"%0.2f";
         }
         self.distanceLabel.text = [NSString stringWithFormat:format, distance];
-        self.distanceLabelSimple.text = [NSString stringWithFormat:format, distanceSimple];
-        self.accuracyLabel.text = [NSString stringWithFormat:@"+/- %d",(int)round([GDCManager sharedManager].lastLocation.horizontalAccuracy)];
-        self.speedLabel.text = [NSString stringWithFormat:@"%d",(int)round([GDCManager sharedManager].lastLocation.speed*3.6)];
+        self.accuracyLabel.text = [NSString stringWithFormat:format, [GDCManager sharedManager].accuracy];
     } else {
         [self.startStopButton setTitle:@"Start" forState:UIControlStateNormal];
         self.startStopButton.backgroundColor = [UIColor colorWithRed:106.f/255.f green:212.f/255.f blue:150.f/255.f alpha:1];
         self.distanceLabel.text = @" ";
-        self.distanceLabelSimple.text = @" ";
         self.durationLabel.text = @" ";
         self.accuracyLabel.text = @" ";
-        self.speedLabel.text = @" ";
     }
 }
-
 
 #pragma mark -
 
@@ -125,6 +115,5 @@
         return [NSString stringWithFormat:@"%d:%02d", hours, minutes];
     }
 }
-
 
 @end

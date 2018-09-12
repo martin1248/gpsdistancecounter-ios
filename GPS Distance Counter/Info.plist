@@ -15,17 +15,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>2</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Location access is only required while counting the distance between GPS locations.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Please allow to enable location services for this app</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Location access is only required while counting the distance between GPS locations.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location access is only required while counting the distance between GPS locations.</string>
 	<key>UIBackgroundModes</key>
