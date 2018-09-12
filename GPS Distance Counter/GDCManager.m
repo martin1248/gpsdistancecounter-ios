@@ -36,6 +36,7 @@
 - (void)startCount {
     self.distanceCountInProgress = YES;
     self.startDate = [NSDate date];
+    
 }
 
 - (void)stopCount {

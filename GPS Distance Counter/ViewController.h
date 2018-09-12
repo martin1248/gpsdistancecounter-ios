@@ -15,6 +15,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (strong, nonatomic) IBOutlet UILabel *durationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accuracyLabel;
+@property (strong, nonatomic) IBOutlet UITextField *distanceTextBox;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
 
 

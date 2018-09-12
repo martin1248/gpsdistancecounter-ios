@@ -70,7 +70,9 @@
 - (IBAction)startStopWasTapped:(id)sender {
     if([GDCManager sharedManager].distanceCountInProgress) {
         [[GDCManager sharedManager] stopCount];
+        self.distanceTextBox.userInteractionEnabled = YES;
     } else {
+        self.distanceTextBox.userInteractionEnabled = NO;
         [[GDCManager sharedManager] startCount];
     }
     [self updateDistanceCount];
@@ -79,26 +81,30 @@
 
 - (void)updateDistanceCount {
     if([GDCManager sharedManager].distanceCountInProgress) {
+        double distance = [self.distanceTextBox.text integerValue] - [GDCManager sharedManager].currentDistance;
+        
+        if(distance <= 0) {
+            distance = 0;
+            [[GDCManager sharedManager] stopCount];
+            self.distanceTextBox.userInteractionEnabled = YES;
+        }
+        
         [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
         self.startStopButton.backgroundColor = [UIColor colorWithRed:252.f/255.f green:109.f/255.f blue:111.f/255.f alpha:1];
+        
+        self.distanceLabel.text = [NSString stringWithFormat:@"%0.0f", distance];
         self.durationLabel.text = [ViewController timeFormatted:[GDCManager sharedManager].currentDuration];
-        double distance = [GDCManager sharedManager].currentDistance;
-        NSString *format;
-        if(distance >= 1000) {
-            format = @"%0.0f";
-        } else if(distance >= 100) {
-            format = @"%0.1f";
-        } else {
-            format = @"%0.2f";
-        }
-        self.distanceLabel.text = [NSString stringWithFormat:format, distance];
-        self.accuracyLabel.text = [NSString stringWithFormat:format, [GDCManager sharedManager].accuracy];
+        self.accuracyLabel.text = [NSString stringWithFormat:@"%0.0f", [GDCManager sharedManager].accuracy];
+        
+        float fractionalProgress = ([self.distanceTextBox.text integerValue]-distance)/[self.distanceTextBox.text integerValue];
+        self.progressView.progress = fractionalProgress;
     } else {
         [self.startStopButton setTitle:@"Start" forState:UIControlStateNormal];
         self.startStopButton.backgroundColor = [UIColor colorWithRed:106.f/255.f green:212.f/255.f blue:150.f/255.f alpha:1];
         self.distanceLabel.text = @" ";
         self.durationLabel.text = @" ";
         self.accuracyLabel.text = @" ";
+        self.progressView.progress = 0;
     }
 }
 
