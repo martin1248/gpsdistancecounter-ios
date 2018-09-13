@@ -11,6 +11,8 @@
 #import "ViewController.h"
 #import "GDCManager.h"
 
+static NSString *const userDefaultsDistance = @"GDC-Distance";
+
 
 @interface ViewController ()
 
@@ -27,9 +29,9 @@
 
     [self.startStopButton.layer setCornerRadius:4.0];
     [self setNeedsStatusBarAppearanceUpdate];
-
+    
     //The next task is to configure the instance of the CLLocationManager class and to make sure that the application requests permission from the user to track the current location of the device. Since this needs to occur when the view loads, an ideal location is in the view controller’s viewDidLoad method in the ViewController.m file:
-    NSLog(@"Initialized locationManager in viewDidLoad. %@",[GDCManager sharedManager].locationManager);
+    NSLog(@"Initialized locationManager %@",[GDCManager sharedManager].locationManager);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,6 +41,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self updateDistanceCount];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -51,6 +55,26 @@
                                                            selector:@selector(updateDistanceCount)
                                                            userInfo:nil
                                                             repeats:YES];
+    
+    [self loadConfig];
+}
+
+- (void)loadConfig {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    long distance = [defaults integerForKey:userDefaultsDistance];
+    if (distance != 0) {
+        self.distanceTextBox.text = [NSString stringWithFormat:@"%ld", distance];
+    }
+}
+
+- (void)saveConfig {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:[self.distanceTextBox.text integerValue] forKey:userDefaultsDistance];
+    [defaults synchronize];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -76,6 +100,7 @@
         self.distanceTextBox.userInteractionEnabled = YES;
     } else {
         self.distanceTextBox.userInteractionEnabled = NO;
+        [self saveConfig];
         [[GDCManager sharedManager] startCount];
     }
     [self updateDistanceCount];
@@ -110,8 +135,6 @@
         self.progressView.progress = 0;
     }
 }
-
-#pragma mark -
 
 + (NSString *)timeFormatted:(int)totalSeconds {
     int seconds = totalSeconds % 60;
