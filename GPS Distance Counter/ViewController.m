@@ -30,6 +30,10 @@ static NSString *const userDefaultsDistance = @"GDC-Distance";
     [self.startStopButton.layer setCornerRadius:4.0];
     [self setNeedsStatusBarAppearanceUpdate];
     
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [self.view addGestureRecognizer:tapBackground];
+    
     //The next task is to configure the instance of the CLLocationManager class and to make sure that the application requests permission from the user to track the current location of the device. Since this needs to occur when the view loads, an ideal location is in the view controller’s viewDidLoad method in the ViewController.m file:
     NSLog(@"Initialized locationManager %@",[GDCManager sharedManager].locationManager);
 }
@@ -135,6 +139,11 @@ static NSString *const userDefaultsDistance = @"GDC-Distance";
         self.accuracyLabel.text = @" ";
         self.progressView.progress = 0;
     }
+}
+
+-(void) dismissKeyboard:(id)sender
+{
+    [self.view endEditing:YES];
 }
 
 + (NSString *)timeFormatted:(int)totalSeconds {
