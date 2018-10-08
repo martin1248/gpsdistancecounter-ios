@@ -23,6 +23,7 @@ static NSString *const GDCNewDataNotification = @"GDCNewDataNotification";
 @property (nonatomic) CLLocationDistance currentDistance;
 @property (nonatomic) CLLocationAccuracy accuracy;
 @property (strong, nonatomic) NSDate *startDate;
+@property (strong, nonatomic) NSMutableString *locationsLog;
 
 - (void)startAllUpdates;
 - (void)stopAllUpdates;

@@ -21,6 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[GDCManager sharedManager] startAllUpdates];
+    [GDCManager sharedManager].locationsLog = [NSMutableString new];
     return YES;
 }
 

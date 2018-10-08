@@ -34,11 +34,15 @@
 }
 
 - (void)startCount {
+    [self.locationsLog appendString:@"Started\n"];
     self.distanceCountInProgress = YES;
     self.startDate = [NSDate date];
 }
 
 - (void)stopCount {
+    [self.locationsLog appendString:@"Stopped\n"];
+    [self.locationsLog appendFormat:@"Distance is %0.0f\n",[self currentDistance]];
+    [self.locationsLog appendFormat:@"Duration is %0.0f\n\n",[self currentDuration]];
     self.distanceCountInProgress = NO;
     self.startDate = nil;
     self.currentDistance = 0;
@@ -47,6 +51,8 @@
 }
 
 - (void)updateCurrentDistanceAndLastLocationWithLocation: (CLLocation*) currentLocation {
+    [self.locationsLog appendString:[currentLocation description]];
+    [self.locationsLog appendString:@"\n"];
     CLLocationDistance d = [self.lastLocation distanceFromLocation:currentLocation];
     self.currentDistance = self.currentDistance + d;
     self.lastLocation = currentLocation;

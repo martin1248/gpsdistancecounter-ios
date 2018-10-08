@@ -36,6 +36,8 @@ static NSString *const userDefaultsDistance = @"GDC-Distance";
     
     //The next task is to configure the instance of the CLLocationManager class and to make sure that the application requests permission from the user to track the current location of the device. Since this needs to occur when the view loads, an ideal location is in the view controller’s viewDidLoad method in the ViewController.m file:
     NSLog(@"Initialized locationManager %@",[GDCManager sharedManager].locationManager);
+    
+    [self addGestureRecognizers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -156,6 +158,26 @@ static NSString *const userDefaultsDistance = @"GDC-Distance";
     } else {
         return [NSString stringWithFormat:@"%d:%02d", hours, minutes];
     }
+}
+
+- (void) addGestureRecognizers {
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRecognized:)];
+    [self.view addGestureRecognizer:panRecognizer];
+}
+
+- (void) panRecognized:(UIPanGestureRecognizer*) recognizer {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = [GDCManager sharedManager].locationsLog;
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Information"
+                                                                   message:@"Ihre GPS Daten sind nun im Zwischenspeicher. Diese können Sie nun in andere Apps einfügen."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
