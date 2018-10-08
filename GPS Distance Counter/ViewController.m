@@ -114,7 +114,8 @@ static NSString *const userDefaultsDistance = @"GDC-Distance";
             distance = 0;
             [[GDCManager sharedManager] stopCount];
             self.distanceTextBox.userInteractionEnabled = YES;
-            AudioServicesPlaySystemSound(1021);
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            AudioServicesPlaySystemSound(1010);
         }
         
         [self.startStopButton setTitle:@"Stop" forState:UIControlStateNormal];
