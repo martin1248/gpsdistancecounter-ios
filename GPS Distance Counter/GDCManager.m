@@ -34,15 +34,20 @@
 }
 
 - (void)startCount {
+    if([[GDCManager sharedManager].locationsLog length] > 4 * 1024 * 1024) {
+        [GDCManager sharedManager].locationsLog = [NSMutableString new];
+    }
     [self.locationsLog appendString:@"Started\n"];
+    
     self.distanceCountInProgress = YES;
     self.startDate = [NSDate date];
 }
 
 - (void)stopCount {
     [self.locationsLog appendString:@"Stopped\n"];
-    [self.locationsLog appendFormat:@"Distance is %0.0f\n",[self currentDistance]];
-    [self.locationsLog appendFormat:@"Duration is %0.0f\n\n",[self currentDuration]];
+    [self.locationsLog appendFormat:@"Distance is %0.0f meters\n",[self currentDistance]];
+    [self.locationsLog appendFormat:@"Duration is %0.0f seconds\n\n",[self currentDuration]];
+    
     self.distanceCountInProgress = NO;
     self.startDate = nil;
     self.currentDistance = 0;
