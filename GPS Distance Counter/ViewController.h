@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *startStopButton;
 - (IBAction)startStopWasTapped:(id)sender;
@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *durationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accuracyLabel;
 @property (strong, nonatomic) IBOutlet UITextField *distanceTextBox;
+@property (weak, nonatomic) IBOutlet UIPickerView *distancePickerView;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
 @property (weak, nonatomic) IBOutlet UIButton *switchLightDarkModeButton;

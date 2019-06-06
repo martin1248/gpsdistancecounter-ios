@@ -14,7 +14,6 @@
 static NSString *const userDefaultsDistance = @"GDC-Distance";
 static NSString *const userDefaultsDarkMode = @"GDC-DarkMode";
 
-
 @interface ViewController ()
 
 @property (strong, nonatomic) NSTimer *viewRefreshTimer;
@@ -22,7 +21,9 @@ static NSString *const userDefaultsDarkMode = @"GDC-DarkMode";
 @end
 
 
-@implementation ViewController
+@implementation ViewController{
+    NSArray *trainLengths;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,6 +42,12 @@ static NSString *const userDefaultsDarkMode = @"GDC-DarkMode";
     [self addGestureRecognizers];
     
     [self applyDarkMode:[self isDarkMode]];
+    
+    
+    trainLengths = @[@"100", @"150", @"200", @"250", @"300", @"350", @"400", @"450", @"500", @"550", @"600", @"650", @"700", @"750" , @"800" , @"850", @"900", @"950", @"1000", @"1050", @"1100", @"1150", @"1200", @"1250", @"1300", @"1350", @"1400"];
+    UIPickerView *pickerView = [[UIPickerView alloc] init];
+    pickerView.delegate = self;
+    self.distanceTextBox.inputView = pickerView;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -235,6 +242,29 @@ static NSString *const userDefaultsDarkMode = @"GDC-DarkMode";
     self.labelE.textColor = textColor;
     self.accuracyLabel.textColor = textColor;
     self.labelF.textColor = textColor;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(nonnull UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(nonnull UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return trainLengths.count;
+}
+
+- (NSInteger)numberOfComponents:(nonnull UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSString *)pickerView:(UIPickerView *)thePickerView
+             titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return trainLengths[row];
+}
+
+- (void)pickerView:(UIPickerView *)thePickerView
+      didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component {
+    self.distanceTextBox.text = trainLengths[row];
 }
 
 @end
