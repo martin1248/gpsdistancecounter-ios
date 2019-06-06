@@ -12,6 +12,7 @@
 #import "GDCManager.h"
 
 static NSString *const userDefaultsDistance = @"GDC-Distance";
+static NSString *const userDefaultsDarkMode = @"GDC-DarkMode";
 
 
 @interface ViewController ()
@@ -38,6 +39,8 @@ static NSString *const userDefaultsDistance = @"GDC-Distance";
     NSLog(@"Initialized locationManager %@",[GDCManager sharedManager].locationManager);
     
     [self addGestureRecognizers];
+    
+    [self applyDarkMode:[self isDarkMode]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -178,6 +181,60 @@ static NSString *const userDefaultsDistance = @"GDC-Distance";
     
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (IBAction)lightDarkModeButtonPressed:(id)sender {
+    BOOL isDarkMode = [self isDarkMode];
+    isDarkMode = !isDarkMode;
+    [self setDarkMode:isDarkMode];
+    
+    [self applyDarkMode:isDarkMode];
+}
+
+- (BOOL)isDarkMode {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:userDefaultsDarkMode];
+}
+
+- (void)setDarkMode:(BOOL) isDarkMode {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:isDarkMode forKey:userDefaultsDarkMode];
+    [defaults synchronize];
+}
+
+- (void) applyDarkMode:(BOOL) isDarkMode {
+    UIColor *background;
+    UIColor *box;
+    UIColor *textColor;
+    if (isDarkMode) {
+        [self.switchLightDarkModeButton setTitle:@"Light mode" forState:UIControlStateNormal];
+        background = UIColor.blackColor;
+        box = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0];
+        textColor = UIColor.whiteColor;
+    } else {
+        [self.switchLightDarkModeButton setTitle:@"Dark mode" forState:UIControlStateNormal];
+        background = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+        box = UIColor.whiteColor;
+        textColor = UIColor.blackColor;
+    }
+    self.rootView.backgroundColor = background;
+    self.dataView.backgroundColor = box;
+    self.firstHiddenLabel.textColor = background;
+    self.firstLabel.textColor = textColor;
+    self.distanceTextBox.backgroundColor = box;
+    self.distanceTextBox.textColor = textColor;
+    self.secondLabel.textColor = textColor;
+    self.secondHiddenLabel.textColor = background;
+    
+    self.labelA.textColor = textColor;
+    self.distanceLabel.textColor = textColor;
+    self.labelB.textColor = textColor;
+    self.labelC.textColor = textColor;
+    self.durationLabel.textColor = textColor;
+    self.labelD.textColor = textColor;
+    self.labelE.textColor = textColor;
+    self.accuracyLabel.textColor = textColor;
+    self.labelF.textColor = textColor;
 }
 
 @end

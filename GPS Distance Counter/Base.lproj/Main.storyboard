@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XTm-ZI-anU">
-                                <rect key="frame" x="57" y="30" width="300" height="440"/>
+                                <rect key="frame" x="57" y="30" width="300" height="460"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="GPS Distance Counter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3B-OY-P7I">
                                         <rect key="frame" x="35.333333333333329" y="0.0" width="229.33333333333337" height="22"/>
@@ -192,11 +192,22 @@
                                             <constraint firstItem="gId-Fi-1ui" firstAttribute="leading" secondItem="oHK-XT-0Ao" secondAttribute="leading" constant="20" id="x7t-V3-KCo"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfL-Vb-L4N">
+                                        <rect key="frame" x="119" y="450" width="62" height="10"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="Abx-vO-GJy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="Dark mode"/>
+                                        <connections>
+                                            <action selector="lightDarkModeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2df-3z-peI"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="5kl-fP-d7L"/>
                                     <constraint firstItem="AE4-TE-Ef1" firstAttribute="centerX" secondItem="XTm-ZI-anU" secondAttribute="centerX" id="HMd-Ij-PfP"/>
-                                    <constraint firstAttribute="height" constant="440" id="NBH-Hj-olm"/>
+                                    <constraint firstAttribute="height" constant="460" id="NBH-Hj-olm"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -208,11 +219,24 @@
                     </view>
                     <connections>
                         <outlet property="accuracyLabel" destination="h40-Sb-EDi" id="vLJ-RO-ldH"/>
+                        <outlet property="dataView" destination="oHK-XT-0Ao" id="v7h-dQ-h0Y"/>
                         <outlet property="distanceLabel" destination="VHx-xS-Ugq" id="FXs-HA-Mi7"/>
                         <outlet property="distanceTextBox" destination="AE4-TE-Ef1" id="hp1-af-nX9"/>
                         <outlet property="durationLabel" destination="Vfa-98-T6V" id="06Z-Sf-8YC"/>
+                        <outlet property="firstHiddenLabel" destination="I3B-OY-P7I" id="FiR-aF-4y9"/>
+                        <outlet property="firstLabel" destination="xE8-80-PWh" id="pnA-cl-56A"/>
+                        <outlet property="labelA" destination="QwY-IR-3Eu" id="txU-AY-I7k"/>
+                        <outlet property="labelB" destination="Lr9-8c-PAM" id="E92-Ww-Lek"/>
+                        <outlet property="labelC" destination="HVj-bI-CQv" id="pQI-rg-kjn"/>
+                        <outlet property="labelD" destination="uM0-dM-Zlb" id="bCo-5e-JOm"/>
+                        <outlet property="labelE" destination="trJ-ZQ-e4T" id="9j5-rC-CRX"/>
+                        <outlet property="labelF" destination="jn4-t0-a57" id="LUU-n4-8Tb"/>
                         <outlet property="progressView" destination="1Hx-cH-6e0" id="AcL-0c-dOR"/>
+                        <outlet property="rootView" destination="8bC-Xf-vdC" id="Qg4-Ye-UbH"/>
+                        <outlet property="secondHiddenLabel" destination="jOO-9F-7BY" id="3hD-dY-pZP"/>
+                        <outlet property="secondLabel" destination="T8m-j4-FTD" id="LH9-0E-OwH"/>
                         <outlet property="startStopButton" destination="d2d-I9-EUk" id="1I8-6P-TPr"/>
+                        <outlet property="switchLightDarkModeButton" destination="WfL-Vb-L4N" id="eOY-RT-yTf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
