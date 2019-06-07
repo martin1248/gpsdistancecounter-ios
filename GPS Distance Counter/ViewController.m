@@ -28,7 +28,7 @@ static NSString *const userDefaultsDarkMode = @"GDC-DarkMode";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
+    
     [self.startStopButton.layer setCornerRadius:4.0];
     [self setNeedsStatusBarAppearanceUpdate];
     
@@ -242,6 +242,8 @@ static NSString *const userDefaultsDarkMode = @"GDC-DarkMode";
     self.labelE.textColor = textColor;
     self.accuracyLabel.textColor = textColor;
     self.labelF.textColor = textColor;
+    
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(nonnull UIPickerView *)pickerView {
@@ -265,6 +267,14 @@ static NSString *const userDefaultsDarkMode = @"GDC-DarkMode";
       didSelectRow:(NSInteger)row
        inComponent:(NSInteger)component {
     self.distanceTextBox.text = trainLengths[row];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    if ([self isDarkMode]) {
+        return UIStatusBarStyleLightContent;
+    }
+    return UIStatusBarStyleDefault;
 }
 
 @end
