@@ -214,12 +214,12 @@ static NSString *const userDefaultsDarkMode = @"GDC-DarkMode";
     UIColor *box;
     UIColor *textColor;
     if (isDarkMode) {
-        [self.switchLightDarkModeButton setTitle:@"Light mode" forState:UIControlStateNormal];
+        [self.switchLightDarkModeButton setTitle:@"Heller Modus" forState:UIControlStateNormal];
         background = UIColor.blackColor;
         box = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0];
         textColor = UIColor.whiteColor;
     } else {
-        [self.switchLightDarkModeButton setTitle:@"Dark mode" forState:UIControlStateNormal];
+        [self.switchLightDarkModeButton setTitle:@"Dunkler Modus" forState:UIControlStateNormal];
         background = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
         box = UIColor.whiteColor;
         textColor = UIColor.blackColor;
